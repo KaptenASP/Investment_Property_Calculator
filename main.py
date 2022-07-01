@@ -181,11 +181,13 @@ else:
 # Creating SNAPSHOTS
 property_snapshots = []
 st.subheader("Snapshots:")
+snapshot_name = st.text_input("Enter Snapshot Name:")
 
 if st.button("Save Snapshot:"):
-#     get_data().append({"rent": rent})
-#
-#     st.write(pd.DataFrame(get_data()))
-#
-# # entries = pd.DataFrame(get_data)
-# st.sidebar.write(pd.DataFrame(get_data()))
+    get_data().append({
+        "snapshot_name": snapshot_name,
+        "gross_income": rent*52,
+        "net_income": rent*52 - long_term_fees,
+    })
+
+st._legacy_table(pd.DataFrame(get_data()))
