@@ -1,6 +1,13 @@
 import streamlit as st
 import constants
 import plotly.graph_objects as go
+import pandas as pd
+
+
+@st.cache(allow_output_mutation=True)
+def get_data():
+    return []
+
 
 st.header("Investment Property Profitability Calculator")
 st.sidebar.header("Calculation Results:")
@@ -11,7 +18,8 @@ st.sidebar.subheader("Costs:")
 
 property_price = st.slider('Enter the property price?', 0, 2000000, 500000, 10000)
 deposit_percent = st.slider("Enter (in %) how much you want to deposit", 5, 30, 10, 1)
-st.write(f"Currently, you want to deposit {deposit_percent}% equating to ${round(deposit_percent / 100 * property_price, 2)}")
+st.write(
+    f"Currently, you want to deposit {deposit_percent}% equating to ${round(deposit_percent / 100 * property_price, 2)}")
 
 deposit_amount = round(deposit_percent / 100 * property_price, 2)
 
@@ -82,6 +90,25 @@ if upfront_cost_breakdown:
     upfront_cost_fig = go.Figure(data=[go.Pie(labels=upfront_cost_labels, values=upfront_cost_values)])
     st.plotly_chart(upfront_cost_fig, use_container_width=True)
 
+    upfront_cost_table = go.Figure(data=[go.Table(
+        header=dict(values=['Name', 'Amount ($)'],
+                    line_color='#656a7a',
+                    fill_color='#0e1117',
+                    font_size=16,
+                    align='center'),
+        cells=dict(values=[
+            upfront_cost_labels,
+            upfront_cost_values],
+            font_size=14,
+            height=30,
+            line_color='#656a7a',
+            fill_color='#0e1117',
+            align='center')
+    )
+    ])
+
+    st.plotly_chart(upfront_cost_table)
+
 st.write("---------------------------------------------------------------------")
 st.subheader("Calculating Long Term Costs")
 
@@ -89,7 +116,8 @@ loan_interest_rate = st.slider('Loan Interest Rate', 0.00, 7.00, 3.00, 0.01)
 loan_term = st.slider("Loan Term", 1, 50, 30, 1)
 
 loan_amount = property_price - deposit_amount
-monthly_repayment_amount = (loan_amount * (loan_interest_rate / 1200) * (1 + (loan_interest_rate / 1200)) ** (loan_term * 12)) / ((1 + (loan_interest_rate / 1200)) ** (loan_term * 12) - 1)
+monthly_repayment_amount = (loan_amount * (loan_interest_rate / 1200) * (1 + (loan_interest_rate / 1200)) ** (
+        loan_term * 12)) / ((1 + (loan_interest_rate / 1200)) ** (loan_term * 12) - 1)
 yearly_repayment_amount = monthly_repayment_amount * 12
 
 agent_fees = st.slider("Enter agent fees (%)", 0, 15, 8, 1)
@@ -149,3 +177,15 @@ elif net_income is 0:
     st.sidebar.warning(f"Net Income = $0")
 else:
     st.sidebar.error(f"Net Income = -${abs(net_income)}")
+
+# Creating SNAPSHOTS
+property_snapshots = []
+st.subheader("Snapshots:")
+
+if st.button("Save Snapshot:"):
+#     get_data().append({"rent": rent})
+#
+#     st.write(pd.DataFrame(get_data()))
+#
+# # entries = pd.DataFrame(get_data)
+# st.sidebar.write(pd.DataFrame(get_data()))
