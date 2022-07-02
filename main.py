@@ -118,23 +118,24 @@ monthly_repayment_amount = (loan_amount * (loan_interest_rate / 1200) * (1 + (lo
         loan_term * 12)) / ((1 + (loan_interest_rate / 1200)) ** (loan_term * 12) - 1)
 yearly_repayment_amount = monthly_repayment_amount * 12
 
-agent_fees = st.slider("Enter agent fees (%)", 0, 15, 8, 1)
+with st.expander("Click for a more advanced input"):
+    agent_fees = st.slider("Enter agent fees (%)", 0, 15, 8, 1)
 
-col1, col2, col3 = st.columns(3)
-council_fees = 0
-maintenance_fees = 0
-insurance_fees = 0
+    col1, col2, col3 = st.columns(3)
+    council_fees = 0
+    maintenance_fees = 0
+    insurance_fees = 0
 
-with col1:
-    council_fees = st.text_input("Enter council fees:", 3000)
-    council_fees = float(council_fees)
-with col2:
-    maintenance_fees = st.text_input("Enter maintenance fees:", 2000)
-    maintenance_fees = float(maintenance_fees)
-with col3:
-    insurance_fees = st.text_input("Enter insurance fees", 1500)
-    insurance_fees = float(insurance_fees)
-
+    with col1:
+        council_fees = st.text_input("Enter council fees:", 3000)
+        council_fees = float(council_fees)
+    with col2:
+        maintenance_fees = st.text_input("Enter maintenance fees:", 2000)
+        maintenance_fees = float(maintenance_fees)
+    with col3:
+        insurance_fees = st.text_input("Enter insurance fees", 1500)
+        insurance_fees = float(insurance_fees)
+        
 st.write("---------------------------------------------------------------------")
 st.subheader("Calculating Long Term Income")
 
