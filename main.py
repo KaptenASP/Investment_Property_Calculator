@@ -10,7 +10,7 @@ def get_data():
 st.set_page_config(page_title="Investment Property Profitability Calculator",
                    page_icon=":moneybag:")
 
-st.header("Investment Property Profitability Calculator")
+st.header("Investment Property Profitability Calculator :moneybag: :dollar: :bar_chart:")
 st.sidebar.header("Calculation Results:")
 
 st.write("---------------------------------------------------------------------")
