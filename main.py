@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit import caching
 import constants
 import plotly.graph_objects as go
 import pandas as pd
