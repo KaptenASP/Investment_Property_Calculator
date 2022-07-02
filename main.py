@@ -8,6 +8,7 @@ import pandas as pd
 def get_data():
     return []
 
+mutable_object.clear()
 
 st.header("Investment Property Profitability Calculator")
 st.sidebar.header("Calculation Results:")
