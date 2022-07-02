@@ -3,12 +3,11 @@ import constants
 import plotly.graph_objects as go
 import pandas as pd
 
+caching.clear_cache()
 
 @st.cache(allow_output_mutation=True)
 def get_data():
     return []
-
-mutable_object.clear()
 
 st.header("Investment Property Profitability Calculator")
 st.sidebar.header("Calculation Results:")
