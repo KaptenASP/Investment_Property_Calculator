@@ -185,14 +185,39 @@ property_snapshots = []
 st.subheader("Snapshots:")
 snapshot_name = st.text_input("Enter Snapshot Name:")
 
+# Creating long term (50 years) graph:
+long_term_performance_graph = go.Figure()
+
 if st.button("Save Snapshot:"):
     get_data().append({
         "snapshot_name": snapshot_name,
         "gross_income": rent * 52,
-        "net_income": rent * 52 - long_term_fees,
+        "long_term_costs": long_term_fees,
+        "loan_term": loan_term,
+        "loan_yearly_repayment": yearly_repayment_amount,
+        "upfront_costs": upfront_costs,
+        "net_income": rent * 52 - long_term_fees
     })
+
 
 if st.button("Clear Table Values"):
     st.legacy_caching.clear_cache()
 
-st._legacy_table(pd.DataFrame(get_data()))
+houses_df = pd.DataFrame(get_data())
+st._legacy_table(houses_df)
+
+for num, name in enumerate(houses_df['snapshot_name']):
+    costs_projection = []
+
+    for i in range(50):
+        if i == 0:
+            costs_projection.append(houses_df['net_income'][num] - houses_df['upfront_costs'][num])
+        elif i < houses_df['loan_term'][num]:
+            costs_projection.append(houses_df['net_income'][num])
+        else:
+            costs_projection.append(houses_df['net_income'][num] + houses_df['loan_yearly_repayment'][num])
+
+    long_term_performance_graph.add_trace(
+        go.Scatter(x=[*range(50)], y=costs_projection, mode='lines', name=name))
+
+st.plotly_chart(long_term_performance_graph, use_container_width=True)
