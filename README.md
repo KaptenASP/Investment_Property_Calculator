@@ -1,7 +1,6 @@
 # Investment_Property_Calculator
 
-
-
+Access link: https://kaptenasp-investment-property-calculator-main-ecq6dg.streamlitapp.com/
 
 The calculator enables individuals to investigate different situations such as interest rate rises, changes in rent and how these will affect the profitability of their investment house, as well as enabling new investors to find a good positive gearing property.
 
