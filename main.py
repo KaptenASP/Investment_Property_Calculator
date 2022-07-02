@@ -1,10 +1,9 @@
 import streamlit as st
-from streamlit import caching
 import constants
 import plotly.graph_objects as go
 import pandas as pd
 
-caching.clear_cache()
+st.legacy_caching.clear_cache()
 
 @st.cache(allow_output_mutation=True)
 def get_data():
