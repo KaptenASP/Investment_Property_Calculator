@@ -206,18 +206,21 @@ if st.button("Clear Table Values"):
 houses_df = pd.DataFrame(get_data())
 st._legacy_table(houses_df)
 
-for num, name in enumerate(houses_df['snapshot_name']):
-    costs_projection = []
+try:
+    for num, name in enumerate(houses_df['snapshot_name']):
+        costs_projection = []
 
-    for i in range(50):
-        if i == 0:
-            costs_projection.append(houses_df['net_income'][num] - houses_df['upfront_costs'][num])
-        elif i < houses_df['loan_term'][num]:
-            costs_projection.append(houses_df['net_income'][num])
-        else:
-            costs_projection.append(houses_df['net_income'][num] + houses_df['loan_yearly_repayment'][num])
+        for i in range(50):
+            if i == 0:
+                costs_projection.append(houses_df['net_income'][num] - houses_df['upfront_costs'][num])
+            elif i < houses_df['loan_term'][num]:
+                costs_projection.append(houses_df['net_income'][num])
+            else:
+                costs_projection.append(houses_df['net_income'][num] + houses_df['loan_yearly_repayment'][num])
 
-    long_term_performance_graph.add_trace(
-        go.Scatter(x=[*range(50)], y=costs_projection, mode='lines', name=name))
+        long_term_performance_graph.add_trace(
+            go.Scatter(x=[*range(50)], y=costs_projection, mode='lines', name=name))
+except KeyError:
+    pass
 
 st.plotly_chart(long_term_performance_graph, use_container_width=True)
