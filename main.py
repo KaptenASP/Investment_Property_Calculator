@@ -3,7 +3,7 @@ import constants
 import plotly.graph_objects as go
 import pandas as pd
 
-st.legacy_caching.clear_cache()
+st.legacy_caching.cache(persist=False)
 
 @st.cache(allow_output_mutation=True)
 def get_data():
@@ -186,8 +186,8 @@ snapshot_name = st.text_input("Enter Snapshot Name:")
 if st.button("Save Snapshot:"):
     get_data().append({
         "snapshot_name": snapshot_name,
-        "gross_income": rent*52,
-        "net_income": rent*52 - long_term_fees,
+        "gross_income": rent * 52,
+        "net_income": rent * 52 - long_term_fees,
     })
 
 st._legacy_table(pd.DataFrame(get_data()))
