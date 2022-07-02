@@ -175,7 +175,7 @@ st.sidebar.subheader("NET (excl. upfront costs):")
 net_income = round(rent * 52 - long_term_fees, 2)
 if net_income > 0:
     st.sidebar.success(f"Net Income = ${net_income}")
-elif net_income is 0:
+elif net_income == 0:
     st.sidebar.warning(f"Net Income = $0")
 else:
     st.sidebar.error(f"Net Income = -${abs(net_income)}")
