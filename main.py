@@ -224,4 +224,6 @@ try:
 except KeyError:
     pass
 
+long_term_performance_graph.update_xaxes(title="years")
+long_term_performance_graph.update_yaxes(title="amount ($)")
 st.plotly_chart(long_term_performance_graph, use_container_width=True)
