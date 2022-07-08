@@ -7,7 +7,7 @@ import pandas as pd
 def get_data():
     return []
 
-st.set_page_config(page_title="Investment Property Profitability Calculator",
+st.set_page_config(page_title="Obsido Investment Property Profitability Calculator",
                    page_icon=":moneybag:",
                    layout="wide")
 
