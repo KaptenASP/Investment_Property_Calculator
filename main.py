@@ -7,11 +7,11 @@ import pandas as pd
 def get_data():
     return []
 
-st.set_page_config(page_title="Obsido Investment Property Profitability Calculator",
+st.set_page_config(page_title="Obsido",
                    page_icon=":moneybag:",
                    layout="wide")
 
-st.header("Investment Property Profitability Calculator :moneybag: :dollar: :bar_chart:")
+st.header("Obsido Investment Property Profitability Calculator :moneybag: :dollar: :bar_chart:")
 st.sidebar.header("Calculation Results:")
 
 st.write("---------------------------------------------------------------------")
